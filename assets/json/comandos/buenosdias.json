@@ -1,0 +1,10 @@
+[
+{
+"user":2,
+"text":"Buenos días"
+},
+{
+"user":1,
+"text":"Buenos días {{username}} para ti también"
+}
+]

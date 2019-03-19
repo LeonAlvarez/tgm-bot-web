@@ -38,7 +38,7 @@ module.exports =
 /******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
 /******/ 		// "0" is the signal for "already loaded"
 /******/ 		if(installedChunks[chunkId] !== 0) {
-/******/ 			var chunk = require("./" + ({}[chunkId]||chunkId) + ".chunk." + {"0":"c4d33","1":"af26d","2":"e04b8"}[chunkId] + ".js");
+/******/ 			var chunk = require("./" + ({}[chunkId]||chunkId) + ".chunk." + {"0":"b4b51","1":"3ac51","2":"342a2"}[chunkId] + ".js");
 /******/ 			var moreModules = chunk.modules, chunkIds = chunk.ids;
 /******/ 			for(var moduleId in moreModules) {
 /******/ 				modules[moduleId] = moreModules[moduleId];
@@ -94,27 +94,27 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
-/***/ "52CA":
+/***/ "+pp0":
 /***/ (function(module, exports) {
 
-module.exports = ["hola","buenosdias","buenastardes"]
+module.exports = {"username":"Pilaricabot","img":"img/pilarica.jpg"}
 
 /***/ }),
 
-/***/ "6Fxg":
+/***/ "1zal":
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"./buenastardes.json": [
-		"FiC2",
+		"XY8+",
 		2
 	],
 	"./buenosdias.json": [
-		"Y9EW",
+		"1imj",
 		1
 	],
 	"./hola.json": [
-		"9jCk",
+		"loOX",
 		0
 	]
 };
@@ -129,8 +129,29 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = "6Fxg";
+webpackAsyncContext.id = "1zal";
 module.exports = webpackAsyncContext;
+
+/***/ }),
+
+/***/ "AHjo":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "BMnL":
+/***/ (function(module, exports) {
+
+module.exports = {"username":"Karu","img":"img/User.jpg"}
+
+/***/ }),
+
+/***/ "I2kH":
+/***/ (function(module, exports) {
+
+module.exports = ["hola","buenosdias","buenastardes"]
 
 /***/ }),
 
@@ -144,11 +165,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var preact_min = __webpack_require__("KM04");
 var preact_min_default = /*#__PURE__*/__webpack_require__.n(preact_min);
 
-// EXTERNAL MODULE: ./styles/tailwind.css
-var tailwind = __webpack_require__("sb+0");
+// EXTERNAL MODULE: ./assets/styles/tailwind.css
+var tailwind = __webpack_require__("AHjo");
 var tailwind_default = /*#__PURE__*/__webpack_require__.n(tailwind);
 
-// CONCATENATED MODULE: ./img/telegram-plane-brands.svg
+// CONCATENATED MODULE: ./assets/img/telegram-plane-brands.svg
 
 
 
@@ -162,7 +183,7 @@ var tailwind_default = /*#__PURE__*/__webpack_require__.n(tailwind);
 });;
 
         
-// CONCATENATED MODULE: ./img/ellipsis-v-solid.svg
+// CONCATENATED MODULE: ./assets/img/ellipsis-v-solid.svg
 
 
 
@@ -176,8 +197,8 @@ var tailwind_default = /*#__PURE__*/__webpack_require__.n(tailwind);
 });;
 
         
-// EXTERNAL MODULE: ./json/comandos.json
-var comandos = __webpack_require__("52CA");
+// EXTERNAL MODULE: ./assets/json/comandos.json
+var comandos = __webpack_require__("I2kH");
 var comandos_default = /*#__PURE__*/__webpack_require__.n(comandos);
 
 // CONCATENATED MODULE: ./helpers.js
@@ -202,7 +223,7 @@ function helpers_commands() {
         }
       };
       try {
-        return Promise.resolve(__webpack_require__("6Fxg")("./" + name + ".json")).then(function ($await_2) {
+        return Promise.resolve(__webpack_require__("1zal")("./" + name + ".json")).then(function ($await_2) {
           try {
             module = $await_2;
             return $return({ name: name, messages: module });
@@ -216,12 +237,12 @@ function helpers_commands() {
     });
   }));
 }
-// EXTERNAL MODULE: ./json/user/1.json
-var _ = __webpack_require__("KwU7");
+// EXTERNAL MODULE: ./assets/json/user/1.json
+var _ = __webpack_require__("+pp0");
 var __default = /*#__PURE__*/__webpack_require__.n(_);
 
-// EXTERNAL MODULE: ./json/user/2.json
-var user_2 = __webpack_require__("OeaQ");
+// EXTERNAL MODULE: ./assets/json/user/2.json
+var user_2 = __webpack_require__("BMnL");
 var user_2_default = /*#__PURE__*/__webpack_require__.n(user_2);
 
 // CONCATENATED MODULE: ./components/App.js
@@ -613,27 +634,6 @@ var index__ref = Object(preact_min["h"])(App_App, null);
     }, render: function render() {} });var j = { h: e, createElement: e, cloneElement: o, createRef: L, Component: U, render: S, rerender: i, options: M }; true ? module.exports = j : self.preact = j;
 }();
 //# sourceMappingURL=preact.min.js.map
-
-/***/ }),
-
-/***/ "KwU7":
-/***/ (function(module, exports) {
-
-module.exports = {"username":"Pilaricabot","img":"img/pilarica.jpg"}
-
-/***/ }),
-
-/***/ "OeaQ":
-/***/ (function(module, exports) {
-
-module.exports = {"username":"Karu","img":"img/User.jpg"}
-
-/***/ }),
-
-/***/ "sb+0":
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ })
 

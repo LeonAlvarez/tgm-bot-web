@@ -1,7 +1,7 @@
 exports.ids = [0];
 exports.modules = {
 
-/***/ "9jCk":
+/***/ "loOX":
 /***/ (function(module, exports) {
 
 module.exports = [{"user":2,"text":"Hola"},{"user":1,"text":"Hola {{username}} ¿Qué tal?"}]
@@ -9,4 +9,4 @@ module.exports = [{"user":2,"text":"Hola"},{"user":1,"text":"Hola {{username}} �
 /***/ })
 
 };;
-//# sourceMappingURL=0.chunk.c4d33.js.map
+//# sourceMappingURL=0.chunk.b4b51.js.map
