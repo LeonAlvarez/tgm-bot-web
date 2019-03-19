@@ -353,7 +353,9 @@ var App_App = function (_Component) {
           type: "text",
           "class": "p-4 cc-box w-full h-full outline-none"
         }),
-        Object(preact_min["h"])(telegram_plane_brands, { "class": "" + (text ? "text-blue cursor-pointer" : "") })
+        Object(preact_min["h"])(telegram_plane_brands, {
+          "class": "chat__send " + (text ? "text-blue cursor-pointer" : "")
+        })
       )
     );
   };
