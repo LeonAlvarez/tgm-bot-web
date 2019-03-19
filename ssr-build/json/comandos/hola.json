@@ -1,0 +1,10 @@
+[
+{
+"user":2,
+"text":"Hola"
+},
+{
+"user":1,
+"text":"Hola {{username}} ¿Qué tal?"
+}
+]
