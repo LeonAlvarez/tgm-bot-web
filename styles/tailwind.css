@@ -61,6 +61,9 @@
  * @import "utilities/skew-transforms";
  */
 
+
+ /* purgecss ignore */
+ 
 .dots {
   @apply bg-white rounded-full w-2 h-2;
   box-shadow: 0px 15px 0px white, 0px 30px 0px white;
