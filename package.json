@@ -1,6 +1,6 @@
 {
-  "name": "chatbot",
-  "version": "1.0.0",
+  "name": "tgm-bot-web",
+  "version": "0.1.0",
   "description": "",
   "main": "src/index.js",
   "scripts": {
@@ -8,12 +8,14 @@
     "build": "preact build",
     "serve": "preact build && preact serve",
     "dev": "preact watch",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "lint": "eslint src"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Leon Alvarez",
+  "license": "MIT",
+  "homepage": "https://github.com/LeonAlvarez/tgm-bot-web",
   "dependencies": {
-    "gh-pages": "^2.0.1",
     "preact": "^8.4.2",
     "preact-cli-svg-loader": "^1.0.0",
     "preact-compat": "^3.18.4"
@@ -27,6 +29,7 @@
     "preact-cli-postcss": "^1.1.1",
     "preact-svg-loader": "^0.2.1",
     "purgecss-webpack-plugin": "^1.4.0",
-    "tailwindcss": "^0.7.4"
+    "tailwindcss": "^0.7.4",
+    "gh-pages": "^2.0.1"
   }
 }
