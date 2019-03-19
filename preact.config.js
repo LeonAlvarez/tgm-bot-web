@@ -22,7 +22,7 @@ const purgeCssPlugin = new PurgecssPlugin({
       extensions: ["js", "jsx"]
     }
   ],
-  whitelistPatterns: [/chat/, /cc-box/, '*']
+  whitelistPatterns: [/chat/, /cc-box/, /body/]
 });
 
 export default function(config, env, helpers) {

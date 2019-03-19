@@ -24,8 +24,6 @@ export default class App extends Component {
 
   commandLauch(command) {
     this.addMessages(...command.messages);
-    this.setState({ text: '' });
-    this.setState({ suggestions: [] });
   }
 
   addMessages(...new_messages) {
@@ -38,6 +36,18 @@ export default class App extends Component {
     this.setState({
       messages: this.state.messages.concat(...messages)
     });
+    this.setState({ text: "" });
+    this.setState({ suggestions: [] });
+  }
+
+  senUserdMessage = (text) => {
+    this.addMessages({ user: 2, text });
+  }
+
+  handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      this.senUserdMessage(this.state.text);
+    }
   }
 
   updateText = e => {
@@ -87,11 +97,13 @@ export default class App extends Component {
             <input
               value={text}
               onInput={this.updateText}
+              onKeyPress={(e) => this.handleKeyPress(e)}
               placeholder="Escribe el comando"
               type="text"
               class="p-4 cc-box w-full h-full outline-none"
             />
             <TelegramPlane
+              onClick={() => this.senUserdMessage(text)}
               class={`chat__send ${text ? "text-blue cursor-pointer" : ""}`}
             />
           </div>
@@ -102,7 +114,7 @@ export default class App extends Component {
 }
 
 export const MessageList = ({ messages }) => (
-  <ul class="list-reset px-6 flex flex-col">
+  <ul class="list-reset px-6 flex flex-col w-100">
     {messages.map(message => (
       <li class={`chat__message ${message.user != 1 ? "user" : ""}`}>
         {message.text}
