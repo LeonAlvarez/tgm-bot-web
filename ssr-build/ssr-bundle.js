@@ -183,7 +183,7 @@ var comandos_default = /*#__PURE__*/__webpack_require__.n(comandos);
 // CONCATENATED MODULE: ./helpers.js
 
 
-function helpers_commands() {
+function commands() {
   return Promise.all(comandos_default.a.map(function (name) {
     return new Promise(function ($return, $error) {
       var module;
@@ -273,19 +273,40 @@ var App_App = function (_Component) {
     var _this = _possibleConstructorReturn(this, _Component.call(this));
 
     _this.updateText = function (e) {
-      _this.setState({ text: e.target.value });
+      var value = e.target.value;
+
+      _this.setState({ text: value });
+      console.log(value.length);
+      if (value.length > 2) {
+        var suggestions = _this.state.commands.filter(function (command) {
+          return command.name.includes(value);
+        });
+        _this.setState({
+          suggestions: suggestions.length > 0 ? suggestions : [{ name: "no se encontraron comandos" }]
+        });
+      } else {
+        _this.setState({ suggestions: [] });
+      }
     };
 
-    helpers_commands().then(function (commands) {
+    commands().then(function (commands) {
       return _this.setState({ commands: commands });
     });
-    _this.setState({ messages: [welcome_message] });
+    _this.setState({
+      messages: [welcome_message],
+      suggestions: []
+    });
+
+    //this.commandLauch = this.commandLauch.bind(this);
     return _this;
   }
 
   App.prototype.commandLauch = function commandLauch(command) {
-    this.addMessages.apply(this, command.messages);
-    this.setState({ text: "" });
+    //this.addMessages(...command.messages);
+    console.log(33);
+    console.log(command);
+    this.setState({ text: '' });
+    this.setState({ suggestions: [] });
   };
 
   App.prototype.addMessages = function addMessages() {
@@ -302,15 +323,18 @@ var App_App = function (_Component) {
       var text = message.text.replace("{{username}}", username);
       return _extends({}, message, { text: text });
     });
+
     this.setState({
       messages: (_state$messages = this.state.messages).concat.apply(_state$messages, messages)
     });
   };
 
   App.prototype.render = function render(_ref, _ref2) {
+    var _this2 = this;
+
     var text = _ref2.text,
         messages = _ref2.messages,
-        commands = _ref2.commands;
+        suggestions = _ref2.suggestions;
 
     _objectDestructuringEmpty(_ref);
 
@@ -346,16 +370,30 @@ var App_App = function (_Component) {
       Object(preact_min["h"])(
         "div",
         { "class": "bg-white fixed w-inherit pin-b cc-box" },
-        Object(preact_min["h"])("input", {
-          value: text,
-          onInput: this.updateText,
-          placeholder: "Escribe el comando",
-          type: "text",
-          "class": "p-4 cc-box w-full h-full outline-none"
-        }),
-        Object(preact_min["h"])(telegram_plane_brands, {
-          "class": "chat__send " + (text ? "text-blue cursor-pointer" : "")
-        })
+        Object(preact_min["h"])(
+          "div",
+          null,
+          Object(preact_min["h"])(App_SuggestionList, {
+            commandLauch: function commandLauch() {
+              return _this2.commandLauch(_this2);
+            },
+            suggestions: suggestions
+          })
+        ),
+        Object(preact_min["h"])(
+          "div",
+          { "class": "relative" },
+          Object(preact_min["h"])("input", {
+            value: text,
+            onInput: this.updateText,
+            placeholder: "Escribe el comando",
+            type: "text",
+            "class": "p-4 cc-box w-full h-full outline-none"
+          }),
+          Object(preact_min["h"])(telegram_plane_brands, {
+            "class": "chat__send " + (text ? "text-blue cursor-pointer" : "")
+          })
+        )
       )
     );
   };
@@ -387,13 +425,28 @@ var App_Message = function Message(_ref7) {
 };
 
 var App_SuggestionList = function SuggestionList(_ref8) {
-  var suggestions = _ref8.suggestions;
+  var suggestions = _ref8.suggestions,
+      commandLauch = _ref8.commandLauch;
   return Object(preact_min["h"])(
     "ul",
-    { "class": "list-reset px-6 flex flex-col" },
-    messages.map(function (message) {
-      return Object(preact_min["h"])(Suggestion, { message: message });
+    { "class": "list-reset px-2 flex flex-col border-grey-light border-b" },
+    suggestions.map(function (suggestion) {
+      return Object(preact_min["h"])(App_Suggestion, {
+        suggestion: suggestion,
+        onClikc: "() => commandLauch(suggestion)"
+      });
     })
+  );
+};
+
+var App_Suggestion = function Suggestion(_ref9) {
+  var suggestion = _ref9.suggestion;
+  return Object(preact_min["h"])(
+    "li",
+    {
+      "class": "px-2 py-2 text-blue cursor-pointer border-grey-light border-b"
+    },
+    suggestion.name
   );
 };
 // CONCATENATED MODULE: ./index.js
