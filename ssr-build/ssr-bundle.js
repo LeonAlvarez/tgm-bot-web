@@ -38,7 +38,7 @@ module.exports =
 /******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
 /******/ 		// "0" is the signal for "already loaded"
 /******/ 		if(installedChunks[chunkId] !== 0) {
-/******/ 			var chunk = require("./" + ({}[chunkId]||chunkId) + ".chunk." + {"0":"b4b51","1":"3ac51","2":"342a2"}[chunkId] + ".js");
+/******/ 			var chunk = require("./" + ({}[chunkId]||chunkId) + ".chunk." + {"0":"c4d33","1":"af26d","2":"e04b8"}[chunkId] + ".js");
 /******/ 			var moreModules = chunk.modules, chunkIds = chunk.ids;
 /******/ 			for(var moduleId in moreModules) {
 /******/ 				modules[moduleId] = moreModules[moduleId];
@@ -94,27 +94,27 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
-/***/ "+pp0":
+/***/ "52CA":
 /***/ (function(module, exports) {
 
-module.exports = {"username":"Pilaricabot","img":"img/pilarica.jpg"}
+module.exports = ["hola","buenosdias","buenastardes"]
 
 /***/ }),
 
-/***/ "1zal":
+/***/ "6Fxg":
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"./buenastardes.json": [
-		"XY8+",
+		"FiC2",
 		2
 	],
 	"./buenosdias.json": [
-		"1imj",
+		"Y9EW",
 		1
 	],
 	"./hola.json": [
-		"loOX",
+		"9jCk",
 		0
 	]
 };
@@ -129,29 +129,8 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = "1zal";
+webpackAsyncContext.id = "6Fxg";
 module.exports = webpackAsyncContext;
-
-/***/ }),
-
-/***/ "AHjo":
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ "BMnL":
-/***/ (function(module, exports) {
-
-module.exports = {"username":"Karu","img":"img/User.jpg"}
-
-/***/ }),
-
-/***/ "I2kH":
-/***/ (function(module, exports) {
-
-module.exports = ["hola","buenosdias","buenastardes"]
 
 /***/ }),
 
@@ -165,11 +144,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var preact_min = __webpack_require__("KM04");
 var preact_min_default = /*#__PURE__*/__webpack_require__.n(preact_min);
 
-// EXTERNAL MODULE: ./assets/styles/tailwind.css
-var tailwind = __webpack_require__("AHjo");
+// EXTERNAL MODULE: ./styles/tailwind.css
+var tailwind = __webpack_require__("sb+0");
 var tailwind_default = /*#__PURE__*/__webpack_require__.n(tailwind);
 
-// CONCATENATED MODULE: ./assets/img/telegram-plane-brands.svg
+// CONCATENATED MODULE: ./img/telegram-plane-brands.svg
 
 
 
@@ -183,7 +162,7 @@ var tailwind_default = /*#__PURE__*/__webpack_require__.n(tailwind);
 });;
 
         
-// CONCATENATED MODULE: ./assets/img/ellipsis-v-solid.svg
+// CONCATENATED MODULE: ./img/ellipsis-v-solid.svg
 
 
 
@@ -197,8 +176,8 @@ var tailwind_default = /*#__PURE__*/__webpack_require__.n(tailwind);
 });;
 
         
-// EXTERNAL MODULE: ./assets/json/comandos.json
-var comandos = __webpack_require__("I2kH");
+// EXTERNAL MODULE: ./json/comandos.json
+var comandos = __webpack_require__("52CA");
 var comandos_default = /*#__PURE__*/__webpack_require__.n(comandos);
 
 // CONCATENATED MODULE: ./helpers.js
@@ -223,7 +202,7 @@ function helpers_commands() {
         }
       };
       try {
-        return Promise.resolve(__webpack_require__("1zal")("./" + name + ".json")).then(function ($await_2) {
+        return Promise.resolve(__webpack_require__("6Fxg")("./" + name + ".json")).then(function ($await_2) {
           try {
             module = $await_2;
             return $return({ name: name, messages: module });
@@ -237,12 +216,12 @@ function helpers_commands() {
     });
   }));
 }
-// EXTERNAL MODULE: ./assets/json/user/1.json
-var _ = __webpack_require__("+pp0");
+// EXTERNAL MODULE: ./json/user/1.json
+var _ = __webpack_require__("KwU7");
 var __default = /*#__PURE__*/__webpack_require__.n(_);
 
-// EXTERNAL MODULE: ./assets/json/user/2.json
-var user_2 = __webpack_require__("BMnL");
+// EXTERNAL MODULE: ./json/user/2.json
+var user_2 = __webpack_require__("OeaQ");
 var user_2_default = /*#__PURE__*/__webpack_require__.n(user_2);
 
 // CONCATENATED MODULE: ./components/App.js
@@ -337,7 +316,7 @@ var App_App = function (_Component) {
 
     return Object(preact_min["h"])(
       "div",
-      { "class": "font-sans relative flex flex-col h-screen shadow leading-normal w-full md:w-1/2 mx-auto text-grey-darkest" },
+      { "class": "font-sans relative flex flex-col h-screen shadow leading-normal w-full text-grey-darkest" },
       Object(preact_min["h"])(
         "div",
         { "class": "bg-blue w-inherit fixed pin-t z-10 text-white p-4 flex items-center justify-between cc-box" },
@@ -361,18 +340,18 @@ var App_App = function (_Component) {
       ),
       Object(preact_min["h"])(
         "div",
-        { "class": "chat-body h-full w-full relative mt-16 mb-12" },
+        { "class": "chat-body h-full flex w-full relative mt-16 mb-12" },
         Object(preact_min["h"])(App_MessageList, { messages: messages })
       ),
       Object(preact_min["h"])(
         "div",
-        { "class": "bg-white fixed w-inherit pin-b" },
+        { "class": "bg-white fixed w-inherit pin-b cc-box" },
         Object(preact_min["h"])("input", {
           value: text,
           onInput: this.updateText,
           placeholder: "Escribe el comando",
           type: "text",
-          "class": "p-4 w-full h-full outline-none"
+          "class": "p-4 cc-box w-full h-full outline-none"
         }),
         Object(preact_min["h"])(telegram_plane_brands, {
           "class": "w-6 mt-4 absolute pin-r mr-8 " + (text ? "text-blue cursor-pointer" : "")
@@ -631,6 +610,27 @@ var index__ref = Object(preact_min["h"])(App_App, null);
     }, render: function render() {} });var j = { h: e, createElement: e, cloneElement: o, createRef: L, Component: U, render: S, rerender: i, options: M }; true ? module.exports = j : self.preact = j;
 }();
 //# sourceMappingURL=preact.min.js.map
+
+/***/ }),
+
+/***/ "KwU7":
+/***/ (function(module, exports) {
+
+module.exports = {"username":"Pilaricabot","img":"img/pilarica.jpg"}
+
+/***/ }),
+
+/***/ "OeaQ":
+/***/ (function(module, exports) {
+
+module.exports = {"username":"Karu","img":"img/User.jpg"}
+
+/***/ }),
+
+/***/ "sb+0":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 
