@@ -114,7 +114,7 @@ export default class App extends Component {
 }
 
 export const MessageList = ({ messages }) => (
-  <ul class="list-reset px-6 flex flex-col w-100">
+  <ul class="list-reset px-6 flex flex-col w-full">
     {messages.map(message => (
       <li class={`chat__message ${message.user != 1 ? "user" : ""}`}>
         {message.text}
