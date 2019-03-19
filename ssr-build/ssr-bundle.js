@@ -275,11 +275,12 @@ var App_App = function (_Component) {
     _this.updateText = function (e) {
       var value = e.target.value;
 
+      var search = value.toLowerCase();
       _this.setState({ text: value });
       console.log(value.length);
       if (value.length > 2) {
         var suggestions = _this.state.commands.filter(function (command) {
-          return command.name.includes(value);
+          return command.name.toLowerCase().includes(search);
         });
         _this.setState({
           suggestions: suggestions.length > 0 ? suggestions : [{ name: "no se encontraron comandos" }]
