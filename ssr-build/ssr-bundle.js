@@ -364,7 +364,7 @@ var App_App = function (_Component) {
       ),
       Object(preact_min["h"])(
         "div",
-        { "class": "chat-body h-full w-full relative mt-20 mb-12" },
+        { "class": "chat-body h-full w-full relative mt-16 mb-12" },
         Object(preact_min["h"])(App_MessageList, { messages: messages })
       ),
       Object(preact_min["h"])(
