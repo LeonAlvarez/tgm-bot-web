@@ -277,7 +277,6 @@ var App_App = function (_Component) {
 
       var search = value.toLowerCase();
       _this.setState({ text: value });
-      console.log(value.length);
       if (value.length > 2) {
         var suggestions = _this.state.commands.filter(function (command) {
           return command.name.toLowerCase().includes(search);
@@ -303,7 +302,6 @@ var App_App = function (_Component) {
 
   App.prototype.commandLauch = function commandLauch(command) {
     this.addMessages.apply(this, command.messages);
-    console.log("called");
     this.setState({ text: '' });
     this.setState({ suggestions: [] });
   };
@@ -316,7 +314,6 @@ var App_App = function (_Component) {
     }
 
     var messages = new_messages.map(function (message) {
-      console.log(message);
       var username = user_2_default.a.username;
 
       var text = message.text.replace("{{username}}", username);
