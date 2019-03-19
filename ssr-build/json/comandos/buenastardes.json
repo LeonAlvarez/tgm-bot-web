@@ -1,0 +1,10 @@
+[
+{
+"user":2,
+"text":"Buenas tardes"
+},
+{
+"user":1,
+"text":"Buenos tardes {{username}} ¿Ya has comido?"
+}
+]
