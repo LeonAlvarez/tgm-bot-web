@@ -297,17 +297,15 @@ var App_App = function (_Component) {
       messages: [welcome_message],
       suggestions: []
     });
-
-    //this.commandLauch = this.commandLauch.bind(this);
+    _this.commandLauch = _this.commandLauch.bind(_this);
     return _this;
   }
 
   App.prototype.commandLauch = function commandLauch(command) {
-    //this.addMessages(...command.messages);
-    console.log(33);
-    console.log(command);
-    /* this.setState({ text: '' });
-    this.setState({ suggestions: [] }); */
+    this.addMessages.apply(this, command.messages);
+    console.log("called");
+    this.setState({ text: '' });
+    this.setState({ suggestions: [] });
   };
 
   App.prototype.addMessages = function addMessages() {
@@ -373,7 +371,7 @@ var App_App = function (_Component) {
           "div",
           null,
           Object(preact_min["h"])(App_SuggestionList, {
-            commandLauch: this.commandLauch,
+            clickHandler: this.commandLauch,
             suggestions: suggestions
           })
         ),
@@ -407,47 +405,33 @@ var App_MessageList = function MessageList(_ref6) {
     "ul",
     { "class": "list-reset px-6 flex flex-col" },
     messages.map(function (message) {
-      return Object(preact_min["h"])(App_Message, { message: message });
+      return Object(preact_min["h"])(
+        "li",
+        { "class": "chat__message " + (message.user != 1 ? "user" : "") },
+        message.text
+      );
     })
   );
 };
 
-var App_Message = function Message(_ref7) {
-  var message = _ref7.message;
-  return Object(preact_min["h"])(
-    "li",
-    { "class": "chat__message " + (message.user != 1 ? "user" : "") },
-    message.text
-  );
-};
-
-var App_SuggestionList = function SuggestionList(_ref8) {
-  var suggestions = _ref8.suggestions,
-      commandLauch = _ref8.commandLauch;
+var App_SuggestionList = function SuggestionList(_ref7) {
+  var suggestions = _ref7.suggestions,
+      clickHandler = _ref7.clickHandler;
   return Object(preact_min["h"])(
     "ul",
-    { "class": "list-reset px-2 flex flex-col border-grey-light border-b" },
-    suggestions.map(function (suggestion) {
-      return Object(preact_min["h"])(App_Suggestion, {
-        suggestion: suggestion,
-        commandLauch: commandLauch
-      });
-    })
-  );
-};
-
-var App_Suggestion = function Suggestion(_ref9) {
-  var suggestion = _ref9.suggestion,
-      commandLauch = _ref9.commandLauch;
-  return Object(preact_min["h"])(
-    "li",
     {
-      "class": "px-2 py-2 text-blue cursor-pointer border-grey-light border-b",
-      onClikc: function onClikc() {
-        return commandLauch(suggestion);
-      }
+      "class": "list-reset px-2 flex flex-col border-grey-light border-b"
     },
-    suggestion.name
+    suggestions.map(function (suggestion) {
+      return Object(preact_min["h"])(
+        "li",
+        { "class": "px-2 py-2 text-blue cursor-pointer border-grey-light border-b",
+          onClick: function onClick(e) {
+            return clickHandler(suggestion);
+          } },
+        suggestion.name
+      );
+    })
   );
 };
 // CONCATENATED MODULE: ./index.js
