@@ -102,4 +102,8 @@
   right: -10px;
   left: unset;
 }
+
+.cc-box {
+  box-sizing: border-box;
+}
 /* purgecss end ignore */

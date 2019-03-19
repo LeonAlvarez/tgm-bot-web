@@ -340,15 +340,12 @@ var App_App = function (_Component) {
       { "class": "font-sans relative flex flex-col h-screen shadow leading-normal w-full md:w-1/2 mx-auto text-grey-darkest" },
       Object(preact_min["h"])(
         "div",
-        { "class": "bg-blue w-inherit fixed pin-t z-10 text-white p-4 flex items-center justify-between" },
+        { "class": "bg-blue w-inherit fixed pin-t z-10 text-white p-4 flex items-center justify-between cc-box" },
         Object(preact_min["h"])(
           "div",
           { "class": "text-white flex items-center" },
           _ref3,
-          Object(preact_min["h"])("img", {
-            src: __default.a.img,
-            "class": "rounded-full w-10 h-10 mr-4"
-          }),
+          Object(preact_min["h"])("img", { src: __default.a.img, "class": "rounded-full w-10 h-10 mr-4" }),
           Object(preact_min["h"])(
             "div",
             { "class": "flex flex-col justify-between" },
