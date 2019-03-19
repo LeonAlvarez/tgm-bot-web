@@ -272,6 +272,16 @@ var App_App = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, _Component.call(this));
 
+    _this.senUserdMessage = function (text) {
+      _this.addMessages({ user: 2, text: text });
+    };
+
+    _this.handleKeyPress = function (e) {
+      if (e.key === 'Enter') {
+        _this.senUserdMessage(_this.state.text);
+      }
+    };
+
     _this.updateText = function (e) {
       var value = e.target.value;
 
@@ -302,8 +312,6 @@ var App_App = function (_Component) {
 
   App.prototype.commandLauch = function commandLauch(command) {
     this.addMessages.apply(this, command.messages);
-    this.setState({ text: '' });
-    this.setState({ suggestions: [] });
   };
 
   App.prototype.addMessages = function addMessages() {
@@ -323,9 +331,13 @@ var App_App = function (_Component) {
     this.setState({
       messages: (_state$messages = this.state.messages).concat.apply(_state$messages, messages)
     });
+    this.setState({ text: "" });
+    this.setState({ suggestions: [] });
   };
 
   App.prototype.render = function render(_ref, _ref2) {
+    var _this2 = this;
+
     var text = _ref2.text,
         messages = _ref2.messages,
         suggestions = _ref2.suggestions;
@@ -378,11 +390,17 @@ var App_App = function (_Component) {
           Object(preact_min["h"])("input", {
             value: text,
             onInput: this.updateText,
+            onKeyPress: function onKeyPress(e) {
+              return _this2.handleKeyPress(e);
+            },
             placeholder: "Escribe el comando",
             type: "text",
             "class": "p-4 cc-box w-full h-full outline-none"
           }),
           Object(preact_min["h"])(telegram_plane_brands, {
+            onClick: function onClick() {
+              return _this2.senUserdMessage(text);
+            },
             "class": "chat__send " + (text ? "text-blue cursor-pointer" : "")
           })
         )
