@@ -62,12 +62,7 @@
  */
 
 
- /* purgecss ignore */
- 
-.dots {
-  @apply bg-white rounded-full w-2 h-2;
-  box-shadow: 0px 15px 0px white, 0px 30px 0px white;
-}
+/* purgecss start ignore */
 
 .chat-body {
   @apply py-3;
@@ -107,3 +102,4 @@
   right: -10px;
   left: unset;
 }
+/* purgecss end ignore */
