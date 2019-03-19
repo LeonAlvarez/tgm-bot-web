@@ -306,8 +306,8 @@ var App_App = function (_Component) {
     //this.addMessages(...command.messages);
     console.log(33);
     console.log(command);
-    this.setState({ text: '' });
-    this.setState({ suggestions: [] });
+    /* this.setState({ text: '' });
+    this.setState({ suggestions: [] }); */
   };
 
   App.prototype.addMessages = function addMessages() {
@@ -331,8 +331,6 @@ var App_App = function (_Component) {
   };
 
   App.prototype.render = function render(_ref, _ref2) {
-    var _this2 = this;
-
     var text = _ref2.text,
         messages = _ref2.messages,
         suggestions = _ref2.suggestions;
@@ -375,9 +373,7 @@ var App_App = function (_Component) {
           "div",
           null,
           Object(preact_min["h"])(App_SuggestionList, {
-            commandLauch: function commandLauch() {
-              return _this2.commandLauch(_this2);
-            },
+            commandLauch: this.commandLauch,
             suggestions: suggestions
           })
         ),
@@ -434,18 +430,22 @@ var App_SuggestionList = function SuggestionList(_ref8) {
     suggestions.map(function (suggestion) {
       return Object(preact_min["h"])(App_Suggestion, {
         suggestion: suggestion,
-        onClikc: "() => commandLauch(suggestion)"
+        commandLauch: commandLauch
       });
     })
   );
 };
 
 var App_Suggestion = function Suggestion(_ref9) {
-  var suggestion = _ref9.suggestion;
+  var suggestion = _ref9.suggestion,
+      commandLauch = _ref9.commandLauch;
   return Object(preact_min["h"])(
     "li",
     {
-      "class": "px-2 py-2 text-blue cursor-pointer border-grey-light border-b"
+      "class": "px-2 py-2 text-blue cursor-pointer border-grey-light border-b",
+      onClikc: function onClikc() {
+        return commandLauch(suggestion);
+      }
     },
     suggestion.name
   );
