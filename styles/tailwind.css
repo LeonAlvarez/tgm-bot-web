@@ -112,4 +112,7 @@
 .cc-box {
   box-sizing: border-box;
 }
+body {
+  margin: 0;
+}
 /* purgecss end ignore */
