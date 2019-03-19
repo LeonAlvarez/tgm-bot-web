@@ -1,0 +1,32 @@
+{
+  "name": "chatbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
+    "build": "preact build",
+    "serve": "preact build && preact serve",
+    "dev": "preact watch",
+    "lint": "eslint src"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gh-pages": "^2.0.1",
+    "preact": "^8.4.2",
+    "preact-cli-svg-loader": "^1.0.0",
+    "preact-compat": "^3.18.4"
+  },
+  "devDependencies": {
+    "eslint": "^4.5.0",
+    "eslint-config-synacor": "^1.1.0",
+    "if-env": "^1.0.0",
+    "preact-cli": "^2.0.0",
+    "preact-cli-plugin-async": "^2.0.0",
+    "preact-cli-postcss": "^1.1.1",
+    "preact-svg-loader": "^0.2.1",
+    "purgecss-webpack-plugin": "^1.4.0",
+    "tailwindcss": "^0.7.4"
+  }
+}
