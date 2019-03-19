@@ -1,6 +1,8 @@
 const preactCliPostCSS = require("preact-cli-postcss");
 const PurgecssPlugin = require("purgecss-webpack-plugin");
-import asyncPlugin from 'preact-cli-plugin-async';
+const preactCliSvgLoader = require("preact-cli-svg-loader");
+import asyncPlugin from "preact-cli-plugin-async";
+import CopyWebpackPlugin from "copy-webpack-plugin";
 const glob = require("glob");
 const path = require("path");
 
@@ -19,9 +21,9 @@ const purgeCssPlugin = new PurgecssPlugin({
       extractor: TailwindExtractor,
       extensions: ["js", "jsx"]
     }
-  ]
+  ],
+  whitelistPatterns: [/chat/, /cc-box/, '*']
 });
-const preactCliSvgLoader = require("preact-cli-svg-loader");
 
 export default function(config, env, helpers) {
   // Use postcss.config.js instead of default postCSS config
@@ -31,5 +33,13 @@ export default function(config, env, helpers) {
   // Run styles through purgeCSS for production only
   if (env.production) {
     config.plugins.push(purgeCssPlugin);
+    config.plugins.push(
+      new CopyWebpackPlugin([
+        { from: `${__dirname}/src/json`, to: "json" },
+        { from: `${__dirname}/src/img`, to: "img" },
+        { from: `${__dirname}/src/styles`, to: "styles" }
+      ])
+    );
+    config.output.publicPath = "/tgm-bot-web/";
   }
 }
