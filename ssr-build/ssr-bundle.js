@@ -346,7 +346,7 @@ var App_App = function (_Component) {
           { "class": "text-white flex items-center" },
           _ref3,
           Object(preact_min["h"])("img", {
-            src: "/../" + __default.a.img,
+            src: "" + __default.a.img,
             "class": "rounded-full w-10 h-10 mr-4"
           }),
           Object(preact_min["h"])(
