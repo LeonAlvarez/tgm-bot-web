@@ -103,6 +103,12 @@
   left: unset;
 }
 
+.chat__send {
+  @apply w-6  absolute pin-r mr-8;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .cc-box {
   box-sizing: border-box;
 }

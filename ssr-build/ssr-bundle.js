@@ -353,9 +353,7 @@ var App_App = function (_Component) {
           type: "text",
           "class": "p-4 cc-box w-full h-full outline-none"
         }),
-        Object(preact_min["h"])(telegram_plane_brands, {
-          "class": "w-6 mt-4 absolute pin-r mr-8 " + (text ? "text-blue cursor-pointer" : "")
-        })
+        Object(preact_min["h"])(telegram_plane_brands, { "class": "" + (text ? "text-blue cursor-pointer" : "") })
       )
     );
   };
@@ -381,7 +379,7 @@ var App_Message = function Message(_ref7) {
   var message = _ref7.message;
   return Object(preact_min["h"])(
     "li",
-    { "class": "chat__message " + (message.user != 1 ? 'user' : '') },
+    { "class": "chat__message " + (message.user != 1 ? "user" : "") },
     message.text
   );
 };
