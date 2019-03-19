@@ -418,7 +418,7 @@ var App_MessageList = function MessageList(_ref6) {
   var messages = _ref6.messages;
   return Object(preact_min["h"])(
     "ul",
-    { "class": "list-reset px-6 flex flex-col w-100" },
+    { "class": "list-reset px-6 flex flex-col w-full" },
     messages.map(function (message) {
       return Object(preact_min["h"])(
         "li",
