@@ -325,6 +325,10 @@ var App_App = function (_Component) {
   }
 
   App.prototype.commandLauch = function commandLauch(command) {
+    this.setState({
+      messages: [welcome_message],
+      suggestions: []
+    });
     this.addMessages.apply(this, command.messages);
   };
 
@@ -333,8 +337,6 @@ var App_App = function (_Component) {
       var _len, new_messages, _key, messages, _iterator, _isArray, _i, _ref, message;
 
       this.setState({ text: "" });
-      this.setState({ suggestions: [] });
-
       return Promise.resolve(delay(150)).then(function ($await_3) {
         try {
           {
@@ -394,7 +396,6 @@ var App_App = function (_Component) {
             function $Loop_1_exit() {
 
               this.messagesElement.scrollTop = this.messagesElement.scrollHeight;
-
               return $return();
             }
           }
@@ -477,7 +478,7 @@ var App_App = function (_Component) {
           }),
           Object(preact_min["h"])(telegram_plane_brands, {
             onClick: function onClick() {
-              return _this2.senUserdMessage(text);
+              return text.length > 0 ? _this2.senUserdMessage(text) : '';
             },
             "class": "chat__send " + (text ? "text-blue cursor-pointer" : "")
           })
