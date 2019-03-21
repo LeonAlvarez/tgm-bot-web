@@ -250,19 +250,25 @@ var welcome_message = {
   user: 1
 };
 
-var _ref3 = Object(preact_min["h"])(
+var delay = function delay(t, data) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve.bind(null, data), t);
+  });
+};
+
+var _ref4 = Object(preact_min["h"])(
   "span",
   { "class": "mr-6" },
   "\u2190"
 );
 
-var _ref4 = Object(preact_min["h"])(
+var _ref5 = Object(preact_min["h"])(
   "span",
   null,
   "bot"
 );
 
-var _ref5 = Object(preact_min["h"])(ellipsis_v_solid, { "class": "h-6" });
+var _ref6 = Object(preact_min["h"])(ellipsis_v_solid, { "class": "h-6" });
 
 var App_App = function (_Component) {
   _inherits(App, _Component);
@@ -277,9 +283,17 @@ var App_App = function (_Component) {
     };
 
     _this.handleKeyPress = function (e) {
-      if (e.key === 'Enter') {
+      if (e.key === "Enter") {
         _this.senUserdMessage(_this.state.text);
       }
+    };
+
+    _this.showAllComands = function () {
+      var commands = _this.state.commands;
+
+      _this.setState({
+        suggestions: commands
+      });
     };
 
     _this.updateText = function (e) {
@@ -315,34 +329,90 @@ var App_App = function (_Component) {
   };
 
   App.prototype.addMessages = function addMessages() {
-    var _state$messages;
+    var $args = arguments;return new Promise(function ($return, $error) {
+      var _len, new_messages, _key, messages, _iterator, _isArray, _i, _ref, message;
 
-    for (var _len = arguments.length, new_messages = Array(_len), _key = 0; _key < _len; _key++) {
-      new_messages[_key] = arguments[_key];
-    }
+      this.setState({ text: "" });
+      this.setState({ suggestions: [] });
 
-    var messages = new_messages.map(function (message) {
-      var username = user_2_default.a.username;
+      return Promise.resolve(delay(150)).then(function ($await_3) {
+        try {
+          {
+            for (_len = $args.length, new_messages = Array(_len), _key = 0; _key < _len; _key++) {
+              new_messages[_key] = $args[_key];
+            }
 
-      var text = message.text.replace("{{username}}", username);
-      return _extends({}, message, { text: text });
-    });
+            messages = new_messages.map(function (message) {
+              var username = user_2_default.a.username;
 
-    this.setState({
-      messages: (_state$messages = this.state.messages).concat.apply(_state$messages, messages)
-    });
-    this.setState({ text: "" });
-    this.setState({ suggestions: [] });
+              var text = message.text.replace("{{username}}", username);
+              return _extends({}, message, { text: text });
+            });
+
+            _iterator = messages, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();
+            var $Loop_1_trampoline;
+
+            function $Loop_1() {
+              if (true) {
+                if (_isArray) {
+                  if (_i >= _iterator.length) return [1];
+                  _ref = _iterator[_i++];
+                } else {
+                  _i = _iterator.next();
+                  if (_i.done) return [1];
+                  _ref = _i.value;
+                }
+
+                message = _ref;
+
+                console.log(new Date());
+                return Promise.resolve(delay(150)).then(function ($await_4) {
+                  try {
+                    this.setState({
+                      messages: this.state.messages.concat(message)
+                    });
+                    return $Loop_1;
+                  } catch ($boundEx) {
+                    return $error($boundEx);
+                  }
+                }.bind(this), $error);
+              } else return [1];
+            }
+
+            return ($Loop_1_trampoline = function (q) {
+              while (q) {
+                if (q.then) return void q.then($Loop_1_trampoline, $error);try {
+                  if (q.pop) {
+                    if (q.length) return q.pop() ? $Loop_1_exit.call(this) : q;else q = $Loop_1;
+                  } else q = q.call(this);
+                } catch (_exception) {
+                  return $error(_exception);
+                }
+              }
+            }.bind(this))($Loop_1);
+
+            function $Loop_1_exit() {
+
+              this.messagesElement.scrollTop = this.messagesElement.scrollHeight;
+
+              return $return();
+            }
+          }
+        } catch ($boundEx) {
+          return $error($boundEx);
+        }
+      }.bind(this), $error);
+    }.bind(this));
   };
 
-  App.prototype.render = function render(_ref, _ref2) {
+  App.prototype.render = function render(_ref2, _ref3) {
     var _this2 = this;
 
-    var text = _ref2.text,
-        messages = _ref2.messages,
-        suggestions = _ref2.suggestions;
+    var text = _ref3.text,
+        messages = _ref3.messages,
+        suggestions = _ref3.suggestions;
 
-    _objectDestructuringEmpty(_ref);
+    _objectDestructuringEmpty(_ref2);
 
     return Object(preact_min["h"])(
       "div",
@@ -353,7 +423,7 @@ var App_App = function (_Component) {
         Object(preact_min["h"])(
           "div",
           { "class": "text-white flex items-center" },
-          _ref3,
+          _ref4,
           Object(preact_min["h"])("img", { src: __default.a.img, "class": "rounded-full w-10 h-10 mr-4" }),
           Object(preact_min["h"])(
             "div",
@@ -363,15 +433,23 @@ var App_App = function (_Component) {
               null,
               __default.a.username
             ),
-            _ref4
+            _ref5
           )
         ),
-        _ref5
+        _ref6
       ),
+      Object(preact_min["h"])(App_MessageList, { messages: messages, messagesRef: function messagesRef(el) {
+          return _this2.messagesElement = el;
+        } }),
       Object(preact_min["h"])(
-        "div",
-        { "class": "chat-body h-full flex w-full relative mt-16 mb-12" },
-        Object(preact_min["h"])(App_MessageList, { messages: messages })
+        "button",
+        {
+          "class": "p-4 z-20 rounded-full border-blue border focus:outline-none text-xs fixed pin-b pin-r mb-16 mr-4 bg-white hover:bg-blue text-blue hover:text-white cursor",
+          onClick: suggestions.length > 0 ? function () {
+            return _this2.setState({ suggestions: [] });
+          } : this.showAllComands
+        },
+        suggestions.length > 0 ? "Ocultar" : "Comandos"
       ),
       Object(preact_min["h"])(
         "div",
@@ -414,36 +492,41 @@ var App_App = function (_Component) {
 
 
 
-var App_MessageList = function MessageList(_ref6) {
-  var messages = _ref6.messages;
+var App_MessageList = function MessageList(_ref7) {
+  var messages = _ref7.messages,
+      messagesRef = _ref7.messagesRef;
   return Object(preact_min["h"])(
     "ul",
-    { "class": "list-reset px-6 flex flex-col w-full" },
+    { "class": "chat-body", ref: messagesRef },
     messages.map(function (message) {
       return Object(preact_min["h"])(
         "li",
         { "class": "chat__message " + (message.user != 1 ? "user" : "") },
-        message.text
+        Object(preact_min["h"])(
+          "span",
+          null,
+          message.text
+        )
       );
     })
   );
 };
 
-var App_SuggestionList = function SuggestionList(_ref7) {
-  var suggestions = _ref7.suggestions,
-      clickHandler = _ref7.clickHandler;
+var App_SuggestionList = function SuggestionList(_ref8) {
+  var suggestions = _ref8.suggestions,
+      clickHandler = _ref8.clickHandler;
   return Object(preact_min["h"])(
     "ul",
-    {
-      "class": "list-reset px-2 flex flex-col border-grey-light border-b"
-    },
+    { "class": "list-reset px-2 flex z-10 flex-col border-grey-light border-b" },
     suggestions.map(function (suggestion) {
       return Object(preact_min["h"])(
         "li",
-        { "class": "px-2 py-2 text-blue cursor-pointer border-grey-light border-b",
+        {
+          "class": "px-2 py-2 text-blue-light hover:text-blue cursor-pointer border-grey-light border-b",
           onClick: function onClick(e) {
             return clickHandler(suggestion);
-          } },
+          }
+        },
         suggestion.name
       );
     })
