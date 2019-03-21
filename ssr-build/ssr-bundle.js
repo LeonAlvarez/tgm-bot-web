@@ -350,7 +350,7 @@ var App_App = function (_Component) {
     var $args = arguments;return new Promise(function ($return, $error) {
       var _len, new_messages, _key, messages, _iterator, _isArray, _i, _ref, message;
 
-      this.setState({ text: "" });
+      this.setState({ text: "", suggestions: [] });
 
       for (_len = $args.length, new_messages = Array(_len), _key = 0; _key < _len; _key++) {
         new_messages[_key] = $args[_key];
