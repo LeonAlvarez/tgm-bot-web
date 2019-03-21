@@ -146,7 +146,7 @@ export default class App extends Component {
 }
 
 export const MessageList = ({ messages, messagesRef }) => (
-  <ul class="chat-body" ref={messagesRef}>
+  <ul class="chat-body cc-box" ref={messagesRef}>
     {messages.map(message => (
       <li class={`chat__message ${message.user != 1 ? "user" : ""}`}>
         <span>{message.text}</span>
