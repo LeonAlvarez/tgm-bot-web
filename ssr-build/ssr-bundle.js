@@ -497,7 +497,7 @@ var App_MessageList = function MessageList(_ref7) {
       messagesRef = _ref7.messagesRef;
   return Object(preact_min["h"])(
     "ul",
-    { "class": "chat-body", ref: messagesRef },
+    { "class": "chat-body cc-box", ref: messagesRef },
     messages.map(function (message) {
       return Object(preact_min["h"])(
         "li",
