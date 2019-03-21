@@ -278,7 +278,9 @@ var App_App = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, _Component.call(this));
 
-    _this.senUserdMessage = function (text) {
+    _this.senUserdMessage = function () {
+      var text = _this.state.text;
+
       if (text.length > 0) {
         _this.addMessages({ user: 2, text: text });
       }
@@ -286,7 +288,7 @@ var App_App = function (_Component) {
 
     _this.handleKeyPress = function (e) {
       if (e.key === "Enter") {
-        _this.senUserdMessage(_this.state.text);
+        _this.senUserdMessage();
       }
     };
 
@@ -320,7 +322,8 @@ var App_App = function (_Component) {
     });
     _this.setState({
       messages: [welcome_message],
-      suggestions: []
+      suggestions: [],
+      text: ""
     });
     _this.commandLauch = _this.commandLauch.bind(_this);
     return _this;
@@ -441,9 +444,12 @@ var App_App = function (_Component) {
         ),
         _ref6
       ),
-      Object(preact_min["h"])(App_MessageList, { messages: messages, messagesRef: function messagesRef(el) {
+      Object(preact_min["h"])(App_MessageList, {
+        messages: messages,
+        messagesRef: function messagesRef(el) {
           return _this2.messagesElement = el;
-        } }),
+        }
+      }),
       Object(preact_min["h"])(
         "button",
         {
@@ -479,9 +485,7 @@ var App_App = function (_Component) {
             "class": "p-4 cc-box w-full h-full outline-none"
           }),
           Object(preact_min["h"])(telegram_plane_brands, {
-            onClick: function onClick() {
-              return _this2.senUserdMessage(text);
-            },
+            onClick: this.senUserdMessage,
             "class": "chat__send " + (text ? "text-blue cursor-pointer" : "")
           })
         )
