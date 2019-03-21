@@ -325,11 +325,20 @@ var App_App = function (_Component) {
   }
 
   App.prototype.commandLauch = function commandLauch(command) {
-    this.setState({
-      messages: [welcome_message],
-      suggestions: []
-    });
-    this.addMessages.apply(this, command.messages);
+    return new Promise(function ($return, $error) {
+      return Promise.resolve(delay(150)).then(function ($await_3) {
+        try {
+          this.setState({
+            messages: [welcome_message],
+            suggestions: []
+          });
+          this.addMessages.apply(this, command.messages);
+          return $return();
+        } catch ($boundEx) {
+          return $error($boundEx);
+        }
+      }.bind(this), $error);
+    }.bind(this));
   };
 
   App.prototype.addMessages = function addMessages() {
@@ -337,72 +346,63 @@ var App_App = function (_Component) {
       var _len, new_messages, _key, messages, _iterator, _isArray, _i, _ref, message;
 
       this.setState({ text: "" });
-      return Promise.resolve(delay(150)).then(function ($await_3) {
-        try {
-          {
-            for (_len = $args.length, new_messages = Array(_len), _key = 0; _key < _len; _key++) {
-              new_messages[_key] = $args[_key];
-            }
 
-            messages = new_messages.map(function (message) {
-              var username = user_2_default.a.username;
+      for (_len = $args.length, new_messages = Array(_len), _key = 0; _key < _len; _key++) {
+        new_messages[_key] = $args[_key];
+      }
 
-              var text = message.text.replace("{{username}}", username);
-              return _extends({}, message, { text: text });
-            });
+      messages = new_messages.map(function (message) {
+        var username = user_2_default.a.username;
 
-            _iterator = messages, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();
-            var $Loop_1_trampoline;
+        var text = message.text.replace("{{username}}", username);
+        return _extends({}, message, { text: text });
+      });
 
-            function $Loop_1() {
-              if (true) {
-                if (_isArray) {
-                  if (_i >= _iterator.length) return [1];
-                  _ref = _iterator[_i++];
-                } else {
-                  _i = _iterator.next();
-                  if (_i.done) return [1];
-                  _ref = _i.value;
-                }
+      _iterator = messages, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();
+      var $Loop_1_trampoline;
 
-                message = _ref;
-
-                console.log(new Date());
-                return Promise.resolve(delay(150)).then(function ($await_4) {
-                  try {
-                    this.setState({
-                      messages: this.state.messages.concat(message)
-                    });
-                    return $Loop_1;
-                  } catch ($boundEx) {
-                    return $error($boundEx);
-                  }
-                }.bind(this), $error);
-              } else return [1];
-            }
-
-            return ($Loop_1_trampoline = function (q) {
-              while (q) {
-                if (q.then) return void q.then($Loop_1_trampoline, $error);try {
-                  if (q.pop) {
-                    if (q.length) return q.pop() ? $Loop_1_exit.call(this) : q;else q = $Loop_1;
-                  } else q = q.call(this);
-                } catch (_exception) {
-                  return $error(_exception);
-                }
-              }
-            }.bind(this))($Loop_1);
-
-            function $Loop_1_exit() {
-
-              this.messagesElement.scrollTop = this.messagesElement.scrollHeight;
-              return $return();
-            }
+      function $Loop_1() {
+        if (true) {
+          if (_isArray) {
+            if (_i >= _iterator.length) return [1];
+            _ref = _iterator[_i++];
+          } else {
+            _i = _iterator.next();
+            if (_i.done) return [1];
+            _ref = _i.value;
           }
-        } catch ($boundEx) {
-          return $error($boundEx);
+
+          message = _ref;
+          return Promise.resolve(delay(150)).then(function ($await_4) {
+            try {
+              this.setState({
+                messages: this.state.messages.concat(message)
+              });
+              return $Loop_1;
+            } catch ($boundEx) {
+              return $error($boundEx);
+            }
+          }.bind(this), $error);
+        } else return [1];
+      }
+
+      return ($Loop_1_trampoline = function (q) {
+        while (q) {
+          if (q.then) return void q.then($Loop_1_trampoline, $error);try {
+            if (q.pop) {
+              if (q.length) return q.pop() ? $Loop_1_exit.call(this) : q;else q = $Loop_1;
+            } else q = q.call(this);
+          } catch (_exception) {
+            return $error(_exception);
+          }
         }
-      }.bind(this), $error);
+      }.bind(this))($Loop_1);
+
+      function $Loop_1_exit() {
+
+        this.messagesElement.scrollTop = this.messagesElement.scrollHeight;
+        return $return();
+      }
     }.bind(this));
   };
 
@@ -478,7 +478,7 @@ var App_App = function (_Component) {
           }),
           Object(preact_min["h"])(telegram_plane_brands, {
             onClick: function onClick() {
-              return text.length > 0 ? _this2.senUserdMessage(text) : '';
+              return text && text.lengt > 0 ? _this2.senUserdMessage(text) : '';
             },
             "class": "chat__send " + (text ? "text-blue cursor-pointer" : "")
           })
