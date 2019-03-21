@@ -279,7 +279,9 @@ var App_App = function (_Component) {
     var _this = _possibleConstructorReturn(this, _Component.call(this));
 
     _this.senUserdMessage = function (text) {
-      _this.addMessages({ user: 2, text: text });
+      if (text.length > 0) {
+        _this.addMessages({ user: 2, text: text });
+      }
     };
 
     _this.handleKeyPress = function (e) {
@@ -478,7 +480,7 @@ var App_App = function (_Component) {
           }),
           Object(preact_min["h"])(telegram_plane_brands, {
             onClick: function onClick() {
-              return text && text.lengt > 0 ? _this2.senUserdMessage(text) : '';
+              return _this2.senUserdMessage(text);
             },
             "class": "chat__send " + (text ? "text-blue cursor-pointer" : "")
           })
