@@ -1,5 +1,5 @@
 /* eslint-disable react/prefer-stateless-function */
-import { Component } from "preact";
+import { Component, h } from "preact";
 import TelegramPlane from "../img/telegram-plane-brands.svg";
 import Dots from "../img/ellipsis-v-solid.svg";
 import { commands } from "./../helpers";
@@ -10,6 +10,12 @@ const welcome_message = {
   text: "Selecciona el comando que quieras saber la explicación.",
   user: 1
 };
+
+const delay = (t, data) => {
+  return new Promise(resolve => {
+    setTimeout(resolve.bind(null, data), t);
+  });
+}
 
 export default class App extends Component {
   constructor() {
@@ -26,29 +32,47 @@ export default class App extends Component {
     this.addMessages(...command.messages);
   }
 
-  addMessages(...new_messages) {
+  async addMessages (...new_messages) {
+
+    this.setState({ text: "" });
+    this.setState({ suggestions: [] });
+
+    await delay(150);
+
     const messages = new_messages.map(message => {
       const { username } = user;
       const text = message.text.replace("{{username}}", username);
       return { ...message, text };
     });
 
-    this.setState({
-      messages: this.state.messages.concat(...messages)
-    });
-    this.setState({ text: "" });
-    this.setState({ suggestions: [] });
+    for (let message of messages) {
+        console.log(new Date());
+        await delay(150);
+        this.setState({
+          messages: this.state.messages.concat(message)
+        });
+    }
+    
+    this.messagesElement.scrollTop = this.messagesElement.scrollHeight;
+ 
   }
 
-  senUserdMessage = (text) => {
+  senUserdMessage = text => {
     this.addMessages({ user: 2, text });
-  }
+  };
 
-  handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
+  handleKeyPress = e => {
+    if (e.key === "Enter") {
       this.senUserdMessage(this.state.text);
     }
-  }
+  };
+
+  showAllComands = () => {
+    const { commands } = this.state;
+    this.setState({
+      suggestions: commands
+    });
+  };
 
   updateText = e => {
     const { value } = e.target;
@@ -83,9 +107,17 @@ export default class App extends Component {
           </div>
           <Dots class="h-6" />
         </div>
-        <div class="chat-body h-full flex w-full relative mt-16 mb-12">
-          <MessageList messages={messages} />
-        </div>
+        <MessageList messages={messages} messagesRef={el => this.messagesElement = el}/>
+        <button
+          class="p-4 z-20 rounded-full border-blue border focus:outline-none text-xs fixed pin-b pin-r mb-16 mr-4 bg-white hover:bg-blue text-blue hover:text-white cursor"
+          onClick={
+            suggestions.length > 0
+              ? () => this.setState({ suggestions: [] })
+              : this.showAllComands
+          }
+        >
+          {suggestions.length > 0 ? "Ocultar" : "Comandos"}
+        </button>
         <div class="bg-white fixed w-inherit pin-b cc-box">
           <div>
             <SuggestionList
@@ -97,7 +129,7 @@ export default class App extends Component {
             <input
               value={text}
               onInput={this.updateText}
-              onKeyPress={(e) => this.handleKeyPress(e)}
+              onKeyPress={e => this.handleKeyPress(e)}
               placeholder="Escribe el comando"
               type="text"
               class="p-4 cc-box w-full h-full outline-none"
@@ -113,23 +145,23 @@ export default class App extends Component {
   }
 }
 
-export const MessageList = ({ messages }) => (
-  <ul class="list-reset px-6 flex flex-col w-full">
+export const MessageList = ({ messages, messagesRef }) => (
+  <ul class="chat-body" ref={messagesRef}>
     {messages.map(message => (
       <li class={`chat__message ${message.user != 1 ? "user" : ""}`}>
-        {message.text}
+        <span>{message.text}</span>
       </li>
     ))}
   </ul>
 );
 
 export const SuggestionList = ({ suggestions, clickHandler }) => (
-  <ul
-    class="list-reset px-2 flex flex-col border-grey-light border-b"
-  >
+  <ul class="list-reset px-2 flex z-10 flex-col border-grey-light border-b">
     {suggestions.map(suggestion => (
-      <li class="px-2 py-2 text-blue cursor-pointer border-grey-light border-b"
-        onClick={(e) => clickHandler(suggestion)}>
+      <li
+        class="px-2 py-2 text-blue-light hover:text-blue cursor-pointer border-grey-light border-b"
+        onClick={e => clickHandler(suggestion)}
+      >
         {suggestion.name}
       </li>
     ))}
