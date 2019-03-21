@@ -23,21 +23,23 @@ export default class App extends Component {
     commands().then(commands => this.setState({ commands }));
     this.setState({
       messages: [welcome_message],
-      suggestions: []
+      suggestions: [],
+      text: "",
     });
     this.commandLauch = this.commandLauch.bind(this);
   }
 
-  commandLauch(command) {
+  async commandLauch(command) {
+    await delay(150);
+    this.setState({
+      messages: [welcome_message],
+      suggestions: []
+    });
     this.addMessages(...command.messages);
   }
 
-  async addMessages (...new_messages) {
-
+  async addMessages (...new_messages) { 
     this.setState({ text: "" });
-    this.setState({ suggestions: [] });
-
-    await delay(150);
 
     const messages = new_messages.map(message => {
       const { username } = user;
@@ -46,7 +48,6 @@ export default class App extends Component {
     });
 
     for (let message of messages) {
-        console.log(new Date());
         await delay(150);
         this.setState({
           messages: this.state.messages.concat(message)
@@ -54,16 +55,18 @@ export default class App extends Component {
     }
     
     this.messagesElement.scrollTop = this.messagesElement.scrollHeight;
- 
   }
 
-  senUserdMessage = text => {
-    this.addMessages({ user: 2, text });
+  senUserdMessage = () => {
+    const { text } = this.state;
+    if (text.length > 0) {
+      this.addMessages({ user: 2, text });
+    }
   };
 
   handleKeyPress = e => {
     if (e.key === "Enter") {
-      this.senUserdMessage(this.state.text);
+      this.senUserdMessage();
     }
   };
 
@@ -107,7 +110,10 @@ export default class App extends Component {
           </div>
           <Dots class="h-6" />
         </div>
-        <MessageList messages={messages} messagesRef={el => this.messagesElement = el}/>
+        <MessageList
+          messages={messages}
+          messagesRef={el => (this.messagesElement = el)}
+        />
         <button
           class="p-4 z-20 rounded-full border-blue border focus:outline-none text-xs fixed pin-b pin-r mb-16 mr-4 bg-white hover:bg-blue text-blue hover:text-white cursor"
           onClick={
@@ -135,7 +141,7 @@ export default class App extends Component {
               class="p-4 cc-box w-full h-full outline-none"
             />
             <TelegramPlane
-              onClick={() => this.senUserdMessage(text)}
+              onClick={this.senUserdMessage}
               class={`chat__send ${text ? "text-blue cursor-pointer" : ""}`}
             />
           </div>
